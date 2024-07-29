@@ -8,16 +8,20 @@ namespace Examination_System.Classes
 {
     internal abstract class Exam
     {
+        #region Attribute And Constructor
         public int Time { get; set; }
         public int NumberOfQuestions { get; set; }
         public Subject Subject { get; set; }
 
-        public Exam(int date , int number) 
+        public Exam(int date, int number)
         {
             Time = date;
             NumberOfQuestions = number;
         }
+        #endregion
 
-        public abstract void ShowExam();
+        #region Methods
+        public abstract void ShowExam(); 
+        #endregion
     }
 }

@@ -8,14 +8,18 @@ namespace Examination_System.Classes
 {
     internal class FinalExam : Exam
     {
-        public FinalExam(int date, int number,Subject subject) : base(date, number)
+        #region Attribute And Constructor
+        public FinalExam(int date, int number, Subject subject) : base(date, number)
         {
             Subject = subject;
         }
+        #endregion
 
+        #region Methods
         public override void ShowExam()
         {
             throw new NotImplementedException();
-        }
+        } 
+        #endregion
     }
 }

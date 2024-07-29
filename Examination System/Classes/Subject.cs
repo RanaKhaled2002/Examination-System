@@ -8,22 +8,26 @@ namespace Examination_System.Classes
 {
     internal class Subject
     {
+        #region Attribute And Constructor
         public int ID { get; set; }
         public string SubjectName { get; set; }
         public Exam Exam { get; set; }
 
-        public Subject(int _id,string _name)
+        public Subject(int _id, string _name)
         {
             ID = _id;
             SubjectName = _name;
         }
+        #endregion
 
-
+        #region Methods
         public void CreateExam()
         {
-            int ExamNumber,NumberOfQuestion;
+            #region Variables
+            int ExamNumber, NumberOfQuestion;
             int Time;
             bool Flag1, Flag2, Flag3;
+            #endregion
 
             #region Choose Type Of Exam
             do
@@ -52,9 +56,8 @@ namespace Examination_System.Classes
             #region Enter Exam
             if (Flag1 && Flag2 && Flag3 && ExamNumber == 1)
             {
-                Exam = new PracticalExam(Time, NumberOfQuestion, this);
                 Console.Clear();
-                Exam.ShowExam();
+                Exam = new PracticalExam(Time, NumberOfQuestion, this);
             }
             else if (Flag1 && Flag2 && Flag3 && ExamNumber == 2)
             {
@@ -64,9 +67,15 @@ namespace Examination_System.Classes
             }
             else
             {
-                Console.WriteLine("Please Enter Correct Number");
-            } 
+                Console.WriteLine("Please Enter Correct Exam Number 1 Or 2.");
+                Console.WriteLine("=============================================");
+                Console.WriteLine();
+                CreateExam();
+            }
             #endregion
-        }
+        } 
+
+
+        #endregion
     }
 }
