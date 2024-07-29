@@ -28,7 +28,7 @@ namespace Examination_System.Classes
                 for (int i = 0; i < mcq.Length; i++)
                 {
                     Console.WriteLine(mcq[i].Header);
-                    Console.WriteLine($"{i + 1}- {mcq[i].Body}");
+                    Console.WriteLine($"{i + 1}- {mcq[i].Body}         {mcq[i].Mark} Marks");
                     foreach (var answer in mcq[i].Answer)
                     {
                         Console.WriteLine($"  {answer.ID}: {answer.Text}");
