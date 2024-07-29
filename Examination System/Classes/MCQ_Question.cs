@@ -63,7 +63,7 @@ namespace Examination_System.Classes
                     {
                         Console.WriteLine("Please Enter Correct Answer:");
                         Flag = int.TryParse(Console.ReadLine(), out correctAnswer);
-                    } while (Flag == false || correctAnswer == 0 || correctAnswer > 3);
+                    } while (Flag == false || (correctAnswer !=1 && correctAnswer !=2 &&correctAnswer != 3));
                     #endregion
 
                     #region Collect Data

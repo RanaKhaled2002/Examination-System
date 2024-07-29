@@ -15,14 +15,17 @@ namespace Examination_System.Classes
         public Answer[] Answer { get; set; }
         public int CorrectAnswer { get; set; }
 
-        public Question(string header, string body, int mark, Answer[] answer, int correctAnswer)
+        public Question(string header, string body, int mark, Answer[] answer, int correctAnswer):this(header, body, mark, correctAnswer)
+        {
+            Answer = answer;
+        }
+        public Question(string header, string body, int mark, int correctAnswer)
         {
             Header = header;
             Body = body;
             Mark = mark;
-            Answer = answer;
             CorrectAnswer = correctAnswer;
-        } 
+        }
         #endregion
 
     }

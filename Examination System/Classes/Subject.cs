@@ -61,9 +61,8 @@ namespace Examination_System.Classes
             }
             else if (Flag1 && Flag2 && Flag3 && ExamNumber == 2)
             {
-                Exam = new FinalExam(Time, NumberOfQuestion, this);
                 Console.Clear();
-                Exam.ShowExam();
+                Exam = new FinalExam(Time, NumberOfQuestion, this);
             }
             else
             {
