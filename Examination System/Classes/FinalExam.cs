@@ -13,6 +13,7 @@ namespace Examination_System.Classes
         public List<TFQuestion> tfList  = new List<TFQuestion>();
         public List<MCQ_Question> mcqList = new List<MCQ_Question>() ; 
         private int TotalGrade = 0;
+        private int TotalExamGrade = 0;
 
         public FinalExam(int date, int number, Subject subject) : base(date, number)
         {
@@ -38,12 +39,14 @@ namespace Examination_System.Classes
                 if(Flag && number==1)
                 {
                     TFQuestion[] tf=TFQuestion.CreateTFQuestion(1);
+                    TotalExamGrade += tf[0].TotalExamGrade;
                     tfList.Add(tf[0]);
                     Console.Clear();
                 }
                 else if(Flag && number==2)
                 {
                     MCQ_Question[] mcq = MCQ_Question.CreateMcqQuestion(1);
+                    TotalExamGrade += mcq[0].TotalExamGrade;
                     mcqList.Add(mcq[0]);
                     Console.Clear();
                 }
@@ -140,7 +143,7 @@ namespace Examination_System.Classes
                 Console.WriteLine();
             }
             Console.WriteLine("----------------------------------");
-            Console.WriteLine($"Your Grade Is: {TotalGrade}");
+            Console.WriteLine($"Your Grade Is: {TotalGrade} / {TotalExamGrade}");
         } 
 
         #endregion

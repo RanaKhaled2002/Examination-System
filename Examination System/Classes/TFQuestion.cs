@@ -9,10 +9,10 @@ namespace Examination_System.Classes
     internal class TFQuestion : Question
     {
         #region Attribute And Constructor
-        public TFQuestion(string header, string body, int mark, Answer[] answer, int correctAnswer) : base(header, body, mark, answer, correctAnswer)
+        public TFQuestion(string header, string body, int mark, Answer[] answer, int correctAnswer, int totalGrade) : base(header, body, mark, answer, correctAnswer,totalGrade)
         {
         }
-        public TFQuestion(string header, string body, int mark, int correctAnswer) : base(header, body, mark, correctAnswer)
+        public TFQuestion(string header, string body, int mark, int correctAnswer,int totalExamGrade) : base(header, body, mark, correctAnswer,totalExamGrade)
         { }
         #endregion
 
@@ -23,7 +23,7 @@ namespace Examination_System.Classes
 
             #region Variables
             TFQuestion[] TF_Question = new TFQuestion[NumOfQuestion];
-            int Grade, correctAnswer; bool Flag;
+            int Grade, correctAnswer,TotalExamGrade = 0; bool Flag;
             string Header, Body;
             #endregion
 
@@ -48,6 +48,7 @@ namespace Examination_System.Classes
                         Console.WriteLine("Enter Grade: ");
                         Flag = int.TryParse(Console.ReadLine(), out Grade);
                     } while (Flag == false || Grade <= 0);
+                    TotalExamGrade += Grade;
                     #endregion
 
                     #region Correct Answer
@@ -61,7 +62,7 @@ namespace Examination_System.Classes
                     #region Collect Data
                     if (Flag)
                     {
-                        TF_Question[i] = new TFQuestion(Header, Body, Grade, correctAnswer);
+                        TF_Question[i] = new TFQuestion(Header, Body, Grade, correctAnswer,TotalExamGrade);
                         Console.Clear();
                     }
                     #endregion

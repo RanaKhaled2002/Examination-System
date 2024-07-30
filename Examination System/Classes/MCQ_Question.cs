@@ -9,7 +9,7 @@ namespace Examination_System.Classes
     internal class MCQ_Question : Question
     {
         #region Constructor
-        public MCQ_Question(string header, string body, int mark, Answer[] answer, int correctAnswer) : base(header, body, mark, answer, correctAnswer)
+        public MCQ_Question(string header, string body, int mark, Answer[] answer, int correctAnswer,int totalGrade) : base(header, body, mark, answer, correctAnswer,totalGrade)
         {
         }
         #endregion
@@ -21,7 +21,7 @@ namespace Examination_System.Classes
 
             #region Variables
             MCQ_Question[] mCQ_Questions = new MCQ_Question[NumOfQuestion];
-            int Grade, correctAnswer; bool Flag;
+            int Grade, correctAnswer,TotalExamGrade = 0; bool Flag;
             string Header, Body;
             #endregion
 
@@ -46,6 +46,7 @@ namespace Examination_System.Classes
                         Console.WriteLine("Enter Grade: ");
                         Flag = int.TryParse(Console.ReadLine(), out Grade);
                     } while (Flag == false || Grade <= 0);
+                    TotalExamGrade += Grade;
                     #endregion
 
                     #region Answers
@@ -69,7 +70,7 @@ namespace Examination_System.Classes
                     #region Collect Data
                     if (Flag)
                     {
-                        mCQ_Questions[i] = new MCQ_Question(Header, Body, Grade, answers, correctAnswer);
+                        mCQ_Questions[i] = new MCQ_Question(Header, Body, Grade, answers, correctAnswer,TotalExamGrade);
                         Console.Clear();
                     }
                     #endregion
