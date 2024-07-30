@@ -52,7 +52,13 @@ namespace Examination_System.Classes
                     {
                         Console.WriteLine($"  {answer.ID}: {answer.Text}");
                     }
-                    Console.WriteLine($"Correct Answer Is: {mcq[i].CorrectAnswer} ");
+                    foreach (var answer in mcq[i].Answer)
+                    {
+                        if (mcq[i].CorrectAnswer == answer.ID)
+                        {
+                            Console.WriteLine($"The Correct Answer Is: {answer.Text}");
+                        }
+                    }
                     Console.WriteLine("======================================");
                     Console.WriteLine();
                 }

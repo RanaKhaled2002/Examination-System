@@ -21,6 +21,7 @@ namespace Examination_System.Classes
         #endregion
 
         #region Methods
+
         public void CreateExam()
         {
             #region Variables
@@ -73,7 +74,6 @@ namespace Examination_System.Classes
             }
             #endregion
         } 
-
 
         #endregion
     }

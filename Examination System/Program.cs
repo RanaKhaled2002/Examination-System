@@ -11,7 +11,7 @@ namespace Examination_System
             subject.CreateExam();
 
             Console.Clear();
-            Console.WriteLine("Do You Want To Start Exam Y | N ");
+            Console.WriteLine("Do You Want To Start Exam Y | Or Any Key To Close Exam ");
 
             if(char.Parse(Console.ReadLine())=='y')
             {

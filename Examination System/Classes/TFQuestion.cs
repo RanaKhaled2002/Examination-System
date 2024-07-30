@@ -62,7 +62,7 @@ namespace Examination_System.Classes
                     #region Collect Data
                     if (Flag)
                     {
-                        TF_Question[i] = new TFQuestion(Header, Body, Grade, correctAnswer,TotalExamGrade);
+                        TF_Question[i] = new TFQuestion(Header, Body, Grade,correctAnswer,TotalExamGrade);
                         Console.Clear();
                     }
                     #endregion

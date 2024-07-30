@@ -127,7 +127,17 @@ namespace Examination_System.Classes
                 Console.WriteLine(tfList[i].Header);
                 Console.WriteLine($"{tfList[i].Body}");
                 Console.WriteLine("1- True       2- Flase");
-                Console.WriteLine($"The Correct Answer Is: {tfList[i].CorrectAnswer}");
+                
+                if (tfList[i].CorrectAnswer == 1)
+                {
+                    Console.WriteLine($"The Correct Answer Is: True");
+                }
+                else
+                {
+                    Console.WriteLine($"The Correct Answer Is: Flase");
+
+                }
+
                 Console.WriteLine();
             }
 
@@ -139,7 +149,14 @@ namespace Examination_System.Classes
                 {
                     Console.WriteLine($"  {answer.ID}: {answer.Text}");
                 }
-                Console.WriteLine($"The Correct Answer Is: {tfList[i].CorrectAnswer}");
+
+                foreach (var answer in mcqList[i].Answer)
+                {
+                    if (mcqList[i].CorrectAnswer == answer.ID)
+                    {
+                        Console.WriteLine($"The Correct Answer Is: {answer.Text}");
+                    }
+                }
                 Console.WriteLine();
             }
             Console.WriteLine("----------------------------------");
