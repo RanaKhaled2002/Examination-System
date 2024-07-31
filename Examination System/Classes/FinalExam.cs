@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace Examination_System.Classes
 {
@@ -14,6 +16,7 @@ namespace Examination_System.Classes
         public List<MCQ_Question> mcqList = new List<MCQ_Question>() ; 
         private int TotalGrade = 0;
         private int TotalExamGrade = 0;
+        Stopwatch sw = new Stopwatch();
 
         public FinalExam(int date, int number, Subject subject) : base(date, number)
         {
@@ -66,6 +69,12 @@ namespace Examination_System.Classes
             {
                 for (int i = 0; i < tfList.Count; i++)
                 {
+                    if (sw.Elapsed.TotalMinutes >= Time)
+                    {
+                        Console.WriteLine("Time is up! The exam has been stopped.");
+                        Console.WriteLine();
+                        break;
+                    }
                     Console.WriteLine(tfList[i].Header);
                     Console.WriteLine($"{tfList[i].Body}         {tfList[i].Mark} Marks");
                     Console.WriteLine("1- True       2- Flase");
@@ -92,6 +101,12 @@ namespace Examination_System.Classes
             {
                 for(int i=0;i<mcqList.Count;i++)
                 {
+                    if (sw.Elapsed.TotalMinutes >= Time)
+                    {
+                        Console.WriteLine("Time is up! The exam has been stopped.");
+                        Console.WriteLine();
+                        break;
+                    }
                     Console.WriteLine(mcqList[i].Header);
                     Console.WriteLine($"{i + 1}- {mcqList[i].Body}         {mcqList[i].Mark} Marks");
                     foreach (var answer in mcqList[i].Answer)
@@ -118,6 +133,7 @@ namespace Examination_System.Classes
 
         public override void ShowExam()
         {
+            sw.Start();
             showTFQuestion();
             showMCQQuestion();
             Console.WriteLine("Exam Is Finish");

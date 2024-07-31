@@ -35,15 +35,16 @@ namespace Examination_System.Classes
             {
                 Console.WriteLine("Please Enter Type Of Exam You Want To Create (1 For Practical And 2 For Final):");
                 Flag1 = int.TryParse(Console.ReadLine(), out ExamNumber);
-            } while (Flag1 == false);
+            } while (Flag1 == false || (ExamNumber !=1 && ExamNumber !=2));
             #endregion
 
             #region Time Of Exam
             do
             {
-                Console.WriteLine("Please Enter Total Time Of Exam In Minutes: ");
+                Console.WriteLine("Please Enter Total Time Of Exam In Minutes (Between 1 And 120): ");
                 Flag2 = int.TryParse(Console.ReadLine(), out Time);
-            } while (Flag2 == false);
+            } while (Flag2 == false || Time <= 0 || Time > 120);
+            Exam.Time = Time;
             #endregion
 
             #region Number Of Question
@@ -51,7 +52,7 @@ namespace Examination_System.Classes
             {
                 Console.WriteLine("Please Enter Number Of Questions:");
                 Flag3 = int.TryParse(Console.ReadLine(), out NumberOfQuestion);
-            } while (Flag3 == false);
+            } while (Flag3 == false || NumberOfQuestion <=0);
             #endregion
 
             #region Enter Exam
@@ -64,13 +65,6 @@ namespace Examination_System.Classes
             {
                 Console.Clear();
                 Exam = new FinalExam(Time, NumberOfQuestion, this);
-            }
-            else
-            {
-                Console.WriteLine("Please Enter Correct Exam Number 1 Or 2.");
-                Console.WriteLine("=============================================");
-                Console.WriteLine();
-                CreateExam();
             }
             #endregion
         } 

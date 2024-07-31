@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace Examination_System.Classes
 {
@@ -23,10 +25,19 @@ namespace Examination_System.Classes
         {
             int userAnswer;
             bool Flag;
+            Stopwatch sw = new Stopwatch();
+
             if (mcq.Length > 0)
             {
+                sw.Start();
                 for (int i = 0; i < mcq.Length; i++)
                 {
+                    if(sw.Elapsed.TotalMinutes >= Time)
+                    {
+                        Console.WriteLine("Time is up! The exam has been stopped.");
+                        Console.WriteLine();
+                        break;
+                    }
                     Console.WriteLine(mcq[i].Header);
                     Console.WriteLine($"{i + 1}- {mcq[i].Body}         {mcq[i].Mark} Marks");
                     foreach (var answer in mcq[i].Answer)

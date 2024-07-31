@@ -9,7 +9,7 @@ namespace Examination_System.Classes
     internal abstract class Exam
     {
         #region Attribute And Constructor
-        public int Time { get; set; }
+        public static int Time { get; set; }
         public int NumberOfQuestions { get; set; }
         public Subject Subject { get; set; }
 
