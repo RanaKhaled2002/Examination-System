@@ -3,90 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace Examination_System.Classes
 {
     internal class PracticalExam : Exam
     {
-        public PracticalExam(int date, int number,Subject subject) : base(date, number)
+        #region Attribute And Constructor
+        private MCQ_Question[] mcq;
+        public PracticalExam(int date, int number, Subject subject) : base(date, number)
         {
             Subject = subject;
+            mcq = MCQ_Question.CreateMcqQuestion(NumberOfQuestions);
         }
+        #endregion
+
+        #region Methods
 
         public override void ShowExam()
         {
+            int userAnswer;
+            bool Flag;
+            Stopwatch sw = new Stopwatch();
 
-            #region Variables
-            MCQ_Question[] mCQ_Question = new MCQ_Question[NumberOfQuestions];
-            int Grade, correctAnswer; bool Flag;
-            string Header, Body; 
-            #endregion
-
-            if (mCQ_Question.Length > 0)
+            if (mcq.Length > 0)
             {
-                for (int i = 0; i < mCQ_Question.Length; i++)
+                sw.Start();
+                for (int i = 0; i < mcq.Length; i++)
                 {
-                    #region Header
-                    Header = $"MCQ Quetion: Question {i + 1}";
-                    Console.WriteLine(Header);
-                    #endregion
-
-                    #region Body
-                    Console.WriteLine("Please Enter Body Of Question: ");
-                    Body = Console.ReadLine();
-                    #endregion
-
-                    #region Mark
-                    do
+                    if(sw.Elapsed.TotalMinutes >= Time)
                     {
-                        Console.WriteLine("Enter Grade");
-                        Flag = int.TryParse(Console.ReadLine(), out Grade);
-                    } while (Flag == false);
-                    #endregion
-
-                    #region Answers
-                    Answer[] answers = new Answer[3];
-                    for (int j = 0; j < 3; j++)
-                    {
-                        Console.WriteLine($"Enter Answers {j + 1}");
-                        string answerText = Console.ReadLine();
-                        answers[j] = new Answer(j + 1, answerText);
+                        Console.WriteLine("Time is up! The exam has been stopped.");
+                        Console.WriteLine();
+                        break;
                     }
-                    #endregion
+                    Console.WriteLine(mcq[i].Header);
+                    Console.WriteLine($"{i + 1}- {mcq[i].Body}         {mcq[i].Mark} Marks");
+                    foreach (var answer in mcq[i].Answer)
+                    {
+                        Console.WriteLine($"  {answer.ID}: {answer.Text}");
+                    }
 
-                    #region Correct Answer
                     do
                     {
-                        Console.WriteLine("Please Enter Correct Answer:");
-                        Flag = int.TryParse(Console.ReadLine(), out correctAnswer);
-                    } while (Flag == false || correctAnswer == 0 || correctAnswer > 3);
-                    #endregion
+                        Console.WriteLine("Please Enter Your Answer {1, 2, 3}:");
+                        Flag = int.TryParse(Console.ReadLine(), out userAnswer);
+                    } while (Flag == false || userAnswer <= 0 || userAnswer > 3);
 
-                    #region Collect Data
-                    if (Flag)
-                    {
-                        mCQ_Question[i]= new MCQ_Question(Header, Body, Grade, answers, correctAnswer);
-                        Console.Clear();
-                    } 
-                    #endregion
-
-
+                    Console.Clear();
                 }
 
-            }
-
-            Console.WriteLine("\nAll Questions:");
-            foreach (var question in mCQ_Question)
-            {
-                Console.WriteLine($"\nHeader: {question.Header}");
-                Console.WriteLine($"Body: {question.Body}");
-                Console.WriteLine($"Mark: {question.Mark}");
-                Console.WriteLine("Answers:");
-                foreach (var answer in question.Answer)
+                Console.WriteLine("Exam Is Finish....");
+                Console.WriteLine();
+                for (int i = 0; i < mcq.Length; i++)
                 {
-                    Console.WriteLine($"  {answer.ID}: {answer.Text}");
+                    Console.WriteLine($"{i + 1}- {mcq[i].Body}");
+                    foreach (var answer in mcq[i].Answer)
+                    {
+                        Console.WriteLine($"  {answer.ID}: {answer.Text}");
+                    }
+                    foreach (var answer in mcq[i].Answer)
+                    {
+                        if (mcq[i].CorrectAnswer == answer.ID)
+                        {
+                            Console.WriteLine($"The Correct Answer Is: {answer.Text}");
+                        }
+                    }
+                    Console.WriteLine("======================================");
+                    Console.WriteLine();
                 }
             }
         }
+            
+        #endregion
     }
 }
